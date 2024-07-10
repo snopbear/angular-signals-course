@@ -36,6 +36,7 @@ export class HomeComponent {
   coursesService = inject(CoursesService);
 
   dialog = inject(MatDialog);
+  messageService = inject(MessagesService);
 
   beginnerCourses = computed(() => {
     const courses = this.#courses();
@@ -47,7 +48,6 @@ export class HomeComponent {
     return courses.filter((course) => course.category === 'ADVANCED');
   });
 
-  messageService = inject(MessagesService);
 
   beginnersList = viewChild<CoursesCardListComponent>('beginnersList');
 
@@ -71,7 +71,7 @@ export class HomeComponent {
       const courses = await this.coursesService.loadAllCourses();
       this.#courses.set(courses.sort(sortCoursesBySeqNo));
     } catch (err) {
-      // this.messageService.showMessage(`Error loading courses!`, 'error');
+      this.messageService.showMessage(`Error loading courses!`, 'error');
       console.error(err);
     }
   }
