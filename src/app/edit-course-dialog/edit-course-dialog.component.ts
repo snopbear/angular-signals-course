@@ -30,7 +30,6 @@ export class EditCourseDialogComponent {
     title: [''],
     longDescription: [''],
     iconUrl: [''],
-    category:['']
   });
 
   courseService = inject(CoursesService);
